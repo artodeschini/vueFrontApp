@@ -1,7 +1,23 @@
 <template>
 <div>
-     <h2>{{ nome }}</h2>
-     <h3>Descricao do cliente: {{ descricao }}</h3>
+    <label>Nome:</label><br>
+    <input type="text" v-model="nome"><!-- Databind two way-->
+    <!-- <input type="text" :data="nome"> Databind one way-->
+    <br>
+    <label>Descricao</label><br>
+    <input type="text" v-model="descricao">
+    <br>
+    <label>Email</label><br>
+    <input type="email" v-model="email">
+    <br>
+    <label>Idade</label><br>
+    <input type="number" v-model="idade">
+    <br>
+    <p>Cliente {{ nome }}</p> <!-- Databind one way-->
+    <p>Descricao {{ descricao }}</p>
+    <p>Email {{ email }}</p>
+    <p>Idade {{ idade }}</p>
+    
 </div>
    
 </template>
