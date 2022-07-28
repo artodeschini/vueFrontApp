@@ -1,20 +1,67 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  <h1>Guia Clientes</h1>
-  <Cliente/>
-  <Produto/>
+  <div id="app">
+    <h3>Cadastro de Clientes:</h3>
+    <label for="nome">Cliente</label>
+    <input type="text" id="nome" name="nome" placeholder="Digite o nome do cliente" v-model="nomeField"/>
+    <br>
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" placeholder="Digite o email do cliente" v-model="emailField"/>
+    <br>
+    <label for="idade">Idade</label>
+    <input type="number" id="idade" name="idade" placeholder="Digite a idade do cliente" v-model="idadeField"/>
+    <br>
+    <label>Descricao</label>
+    <select id="descricao" name="descricao" v-model="descricaoField">
+      <option>Criança</option>
+      <option>Analista TI</option>
+      <option>Estudante</option>
+    </select>
+    <br>
+    <button @click="cadastrarCliente">Cadastrar</button>
+    <hr>
+    <div v-for="(c, index) in clientes" :key="c.id">
+      <p>{{ index  }}</p>
+      <Cliente :cliente="c"></Cliente>
+    </div>
+  </div>
 </template>
 
 <script>
-import Cliente from './components/Cliente';
-import Produto from './components/Produto';
+// import Fomulario from './components/DetailCliente.vue';
+import Cliente from './components/ListCliente.vue';
+
+// import Produto from './components/Produto';
 
 export default {
   name: 'App',
+  
+  data() {
+    return {
+      clientes: [
+        {id: 1, nome: 'Artur', email: 'a@a.com', idade: 45, descricao: 'Analista TI'},
+        {id: 2, nome: 'Catia', email: 'c@c.com', idade: 41, descricao: 'Analista TI'},
+        {id: 3, nome: 'Manu', email: 'm@m.com', idade: 7, descricao: 'Criança'},
+      ]
+    }
+  },
   components: {
     Cliente,
-    Produto
+    // Produto
+  },
+  methods: {
+    cadastrarCliente: function() {
+      this.clientes.push(
+        { id: Date.now(),
+          nome: this.nomeField,
+          email: this.emailField, 
+          idade: this.idadeField, 
+          descricao: this.descricaoField });
+
+        this.nomeField = ''; 
+        this.emailField = ''; 
+        this.idadeField = ''; 
+        this.nomeField = ''; 
+    }
   }
 }
 </script>
