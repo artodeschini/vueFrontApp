@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h3>Cadastro de Clientes:</h3>
+    <small id="nomeErro" v-show="erro">Deu Erro verifique o nome</small>
     <label for="nome">Cliente</label>
     <input type="text" id="nome" name="nome" placeholder="Digite o nome do cliente" v-model="nomeField"/>
     <br>
@@ -50,23 +51,31 @@ export default {
   },
   methods: {
     cadastrarCliente: function() {
-      this.clientes.push(
-        { id: Date.now(),
-          nome: this.nomeField,
-          email: this.emailField, 
-          idade: this.idadeField, 
-          descricao: this.descricaoField });
+      // como validar
+      if (this.nomeField == undefined || this.nomeField.length < 3 ) {
+        this.erro = true;
+      } else {
+        this.clientes.push(
+          { id: Date.now(),
+            nome: this.nomeField,
+            email: this.emailField, 
+            idade: this.idadeField, 
+            descricao: this.descricaoField });
 
         this.nomeField = ''; 
         this.emailField = ''; 
         this.idadeField = ''; 
         this.nomeField = ''; 
+
+        this.erro = false;
+      }
     }
   }
 }
 </script>
 
 <style>
+
 #app {
   /* font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -74,5 +83,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px; */
+
 }
+
+#nomeErro {
+  color: red;
+}
+
+
 </style>
