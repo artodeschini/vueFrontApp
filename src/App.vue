@@ -22,7 +22,7 @@
     <hr>
     <div v-for="(c, index) in clientes" :key="c.id">
       <p>{{ index  }}</p>
-      <Cliente :cliente="c"></Cliente>
+      <Cliente :cliente="c" @emitirEvento="deletarCliente"></Cliente>
     </div>
   </div>
 </template>
@@ -69,6 +69,15 @@ export default {
 
         this.erro = false;
       }
+    },
+    deletarCliente: function($event) {
+      console.log("recebendo o evento");
+      //console.log($event);
+      //console.log($event.id);
+      let id = $event.id;
+      let data = this.clientes.filter(cliente => cliente.id != id);
+      // console.log(data);
+      this.clientes = data;
     }
   }
 }

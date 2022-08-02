@@ -36,6 +36,11 @@ name: 'DetailCliente',
     addCliente: function($event) {
       console.log($event);
       this.cliente
+    },
+
+    emitirEvento: function() {
+      console.log('emitido do filho');
+      this.$emit("meDeleteCliente")
     }
   }
 }

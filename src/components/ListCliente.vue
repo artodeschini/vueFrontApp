@@ -6,7 +6,7 @@
     <p>Descricao {{ cliente.descricao }}</p>
     <p>Email {{ cliente.email }}</p>
     <p>Idade {{ cliente.idade }}</p>
-    
+    <button @click="emitirEvento($event)">Deletar</button>
 </div>
    
 </template>
@@ -26,6 +26,12 @@ export default {
     // idade: Number,
     // descricao: String
     cliente: Object
+  },
+  methods: {
+    emitirEvento: function($event) {
+      console.log($event);
+      this.$emit("emitirEvento", { id: this.cliente.id, component: this});
+    }
   }
 }
 </script>
